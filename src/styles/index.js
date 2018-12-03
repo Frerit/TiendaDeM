@@ -7,8 +7,8 @@ function wp (percentage) {
     return Math.round(value);
 }
 
-const slideHeight = viewportHeight * 0.36;
-const slideWidth = wp(75);
+const slideHeight = viewportHeight * 0.25;
+const slideWidth = wp(60);
 const itemHorizontalMargin = wp(2);
 
 export const sliderWidth = viewportWidth;
@@ -19,10 +19,10 @@ const entryBorderRadius = 8;
 
 export const colors = {
     black: '#1a1917',
-    gray: '#888888',
+    gray: '#888',
     white: "white",
-    background1: '#B721FF',
-    background2: '#21D4FD'
+    background1: '#1c7bff',
+    background2: '#499c54'
 };
 
 export default StyleSheet.create({
@@ -78,7 +78,8 @@ export default StyleSheet.create({
         paddingVertical: 10 // for custom animation
     },
     paginationContainer: {
-        paddingVertical: 8
+        paddingVertical:3,
+        marginBottom: 5
     },
     paginationDot: {
         width: 8,
@@ -90,7 +91,7 @@ export default StyleSheet.create({
         width: itemWidth,
         height: slideHeight,
         paddingHorizontal: itemHorizontalMargin,
-        paddingBottom: 18 // needed for shadow
+        paddingBottom: 5 // needed for shadow
     },
     shadow: {
         position: 'absolute',
@@ -150,6 +151,40 @@ export default StyleSheet.create({
     },
     subtitleEven: {
         color: 'rgba(255, 255, 255, 0.7)'
+    },
+    headerTabs: {
+        backgroundColor: colors.white,
+        color: colors.black,
+        marginTop: 8
+    },
+    tabContainer: {
+      backgroundColor: colors.white
+
+    },
+    tabActive: {
+        backgroundColor: colors.white
+    },
+    colorText: {
+        color: colors.gray
+    },
+    textColorActive: {
+        color: colors.black
+    },
+    iconShopin : {
+        marginTop: 10
+    },
+    textBageShopping: {
+        fontSize: 10,
+        position: 'absolute',
+        right: 0,
+        top:5,
+        backgroundColor: 'red',
+        alignContent: 'center',
+        alignSelf: 'center',
+        paddingVertical: 5,
+        paddingLeft: 6,
+        paddingRight: 9,
+        borderRadius: 50
     }
 });
 
