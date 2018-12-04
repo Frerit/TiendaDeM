@@ -5,7 +5,9 @@ import Home from "../scenes/home";
 import Login from "../scenes/login";
 
 
+const Stack = createStackNavigator({
 
+})
 
 const AppNavigator = createSwitchNavigator({
     Login: Login,
