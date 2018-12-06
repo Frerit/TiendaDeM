@@ -1,42 +1,50 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {StyleSheet} from "react-native";
+import {StyleSheet, ImageBackground} from "react-native";
+import { addProductToCart } from "../../redux/actions/addcard";
 
-import {Container, Image, Header, Text,
-    Body, View } from "native-base";
+import {Container, Button, Text, Icon,
+    Content, View } from "native-base";
 
 
 class SingleDetail extends Component {
     render() {
+        const { navigation } = this.props;
+        const item = navigation.getParam('item');
+
         return (
-            <Container>
-               <Body>
-                   <View style={[styles.root, this.props.style]}>
-                       <Image
-                           style={styles.cardItemImagePlace}
-                           source={{uri:  'https://placekitten.com/200/200'}}
-                       />
-                       <View style={styles.cardBody}>
-                           <View style={styles.bodyContent}>
-                               <Text style={styles.titleStyle}>Title goes here</Text>
-                               <Text style={styles.subtitleStyle}>Subtitle here</Text>
-                           </View>
-                           <View style={styles.actionBody}>
-                               <TouchableOpacity style={styles.actionButton1}>
-                                   <Text style={styles.actionText1}>ACTION 1</Text>
-                               </TouchableOpacity>
-                               <TouchableOpacity style={styles.actionButton2}>
-                                   <Text style={styles.actionText2}>ACTION 2</Text>
-                               </TouchableOpacity>
-                           </View>
+            <Container style={styles.root}>
+               <Content>
+                   <View style={styles.banner}>
+                       <ImageBackground source={{uri: 'https://placekitten.com/200/200'}} style={{width: '100%', height: '100%'}}>
+                          <View style={styles.outBanner}>
+                           <Text>Inside</Text>
+                              <Icon name='home' />
+                          </View>
+                       </ImageBackground>
+                   </View>
+
+                   <View style={{flex: 1, flexDirection: 'row'}}>
+                       <View style={styles.columL} >
+                           <Text style={styles.text3}>
+                               [06/Dec/2018:19:26:04 +0000] "GET /index.delta?platform=android&
+                               dev=true&minify=false&deltaBundleId=54a9123e04d6fc30 HT n   TP/1.1" 200 - "-"
+                               "okhttp/3.11.0"
+
+                           </Text>
+                       </View>
+                       <View style={styles.columR} >
+                           <Text >Cantidad</Text>
+                           <Text style={styles.text}> {JSON.stringify(item)}</Text>
+                           <Button style={{padding: '10%', alignSelf: 'center'}} danger onPress= {() => {
+                               this.props.addItemToCart
+                               console.log(JSON.stringify(item))
+                           } }>
+                               <Text>Agregar</Text>
+                           </Button>
                        </View>
                    </View>
-                   <Stepper style={styles.stepper} />
-                   <Text style={styles.text}>1</Text>
-                   <Text style={styles.text2}>Cantidad</Text>
-                   <Text style={styles.text3}>Text Added</Text>
-                   <Button style={styles.button72} />
-               </Body>
+               </Content>
             </Container>
         );
     }
@@ -46,22 +54,38 @@ function mapStateToProps(state) {
     return {};
 }
 
+const mapDispatchToProps = ( dispatch ) => {
+    return {
+        addItemToCart: ( product ) => dispatch(addProductToCart(product))
+    }
+}
+
 export default connect(
-    mapStateToProps,
+    mapStateToProps,mapDispatchToProps
 )(SingleDetail);
 
 
 const styles = StyleSheet.create({
     root: {
         backgroundColor: "white",
-        flex: 1
+        flex: 1,
     },
-    card9: {
-        top: -2,
-        position: "absolute",
-        width: 375,
-        left: "0%"
+    banner: {
+        flex: 1,
+        height: 300,
+        flexDirection: 'row'
     },
+    columL: {
+        flex: 1,
+        padding: 15,
+    },
+    columR: {
+        flex: .8,
+        alignContent: 'center',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+
     stepper: {
         position: "absolute",
         height: 29,
@@ -80,16 +104,7 @@ const styles = StyleSheet.create({
         backgroundColor: "rgba(245,50,50,1)",
         opacity: 1
     },
-    text: {
-        top: 440,
-        left: 235,
-        position: "absolute",
-        backgroundColor: "transparent",
-        height: 39,
-        width: 86,
-        fontSize: 25,
-        textAlign: "center"
-    },
+
     text2: {
         top: 411,
         left: 232,
@@ -100,10 +115,6 @@ const styles = StyleSheet.create({
     text3: {
         height: 224.11,
         width: 174.53,
-        top: 413.29,
-        left: 30.35,
-        position: "absolute",
-        backgroundColor: "transparent"
     },
     button72: {
         top: 539,

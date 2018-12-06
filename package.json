@@ -5,6 +5,7 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "android": "react-native run-android",
+    "cache": "watchman watch-del-all && yarn cache clean && yarn install && yarn start -- --reset-cache",
     "test": "jest"
   },
   "dependencies": {

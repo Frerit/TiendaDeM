@@ -11,13 +11,12 @@ import ShoppingCartIcon from "../../navigation/component/shoppin-cart";
 import TabTools from "./component/tab-tools";
 
 
-
 class Home extends Component {
 
     constructor (props) {
         super(props);
         this.state = {
-            slider1ActiveSlide: 1
+            slider1ActiveSlide: 1,
         };
     }
 
@@ -48,9 +47,8 @@ class Home extends Component {
                             </Button>
                         </Left>
                         <Body>
-                        <Title>Header</Title>
                         </Body>
-                        <Right style={styles.sinmargen}>
+                        <Right>
                             <ShoppingCartIcon/>
                         </Right>
                     </Header>
@@ -108,7 +106,7 @@ class Home extends Component {
                                          activeTabStyle={styles.tabActive}
                                          activeTextStyle={styles.textColorActive}
                                          heading="Games">
-                                        {/*<Tab2 />*/}
+
                                     </Tab>
                                     <Tab tabStyle={styles.tabContainer}
                                          textStyle={styles.colorText}

@@ -13,6 +13,7 @@ const ShoppingCartIcon = props => (
 );
 
 const mapDispatchToProsp = ( state ) => {
+    console.log("State||| "+ state);
     return {
         cartItems: state.cart
     }

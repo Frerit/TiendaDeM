@@ -6,10 +6,11 @@ import { Text, Icon} from "native-base";
 class CartItem extends Component {
     // Only for displaying symbol in BuilderX.
     render() {
+        console.log("Cart|||  "+ JSON.stringify(this.props.product));
         return (
             <View style={[styles.root, this.props.style]} >
-                <TouchableOpacity onPress={() => this.props.navigation.navigate("Detail")}>
-                    <Image style={styles.cardItemImagePlace} source={{uri: 'https://placekitten.com/200/200'}}
+                <TouchableOpacity onPress={() => this.props.navigation.navigate("Detail", {item: this.props.item} )}>
+                    <Image style={styles.cardItemImagePlace} source={{uri: this.props.product.image}}
 
                     />
                 </TouchableOpacity>

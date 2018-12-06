@@ -1,5 +1,6 @@
 import { ADD_TO_CART, REMOVE_FROM_CART } from "../types";
 
+
 const cartItem = (state = [], action) => {
     switch (action.type) {
         case ADD_TO_CART:
