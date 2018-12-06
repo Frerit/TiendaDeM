@@ -8,6 +8,8 @@ import Carousel, {Pagination} from 'react-native-snap-carousel';
 import {ENTRIES1} from "./dummy/data";
 import SliderEntry from "./component/sliderentry";
 import ShoppingCartIcon from "../../navigation/component/shoppin-cart";
+import TabTools from "./component/tab-tools";
+
 
 
 class Home extends Component {
@@ -48,7 +50,7 @@ class Home extends Component {
                         <Body>
                         <Title>Header</Title>
                         </Body>
-                        <Right>
+                        <Right style={styles.sinmargen}>
                             <ShoppingCartIcon/>
                         </Right>
                     </Header>
@@ -98,8 +100,8 @@ class Home extends Component {
                                          activeTabStyle={styles.tabActive}
                                          activeTextStyle={styles.textColorActive}
                                          heading="Herramientas" >
-                                        <Text> Test </Text>
-                                       {/* <Tab1 />*/}
+
+                                        <TabTools {...this.props} />
                                     </Tab>
                                     <Tab tabStyle={styles.tabContainer}
                                          textStyle={styles.colorText}

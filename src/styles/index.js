@@ -173,6 +173,11 @@ export default StyleSheet.create({
     iconShopin : {
         marginTop: 10
     },
+    shoppinheader: {
+       marginTop: 8,
+       marginRight: 5
+    },
+
     textBageShopping: {
         fontSize: 10,
         position: 'absolute',
