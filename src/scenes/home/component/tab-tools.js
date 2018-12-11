@@ -1,56 +1,66 @@
 import React, {Component} from 'react';
 import CartItem from "./cart-item";
+import { compose } from 'redux';
 import { connect } from 'react-redux';
-import styles from "../../../styles";
-import {StyleSheet, Text} from "react-native";
-import GridView from 'react-native-super-grid';
-import {showProducts} from "../../../redux/actions/addproduct";
+import PropTypes from 'prop-types'
+import {StyleSheet, Text, View, Dimensions} from "react-native";
 
-class TabTools extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            slider1ActiveSlide: 1,
-        };
-    }
-    componentDidUpdate() {
-        this.props.showProducts()
-    }
-    rendr() {
-        <GridView
-            style={styles.gridView}
-            itemDimension={150}
-            items={this.props.personData}
-            renderItem={item => (<CartItem {...this.props}  />)}
-        />
-    }
+import { branch, renderComponent, withHandlers } from 'recompose';
+import { isLoaded, isEmpty, firebaseConnect } from 'react-redux-firebase';
 
-    render() {
-        console.log("Tabbs|||" + JSON.stringify(this.props));
-        return (
-            <Text> Hola </Text>
-        );
-    }
+const populates = [
+    { child: 'value', root: '/herramientas' }
+];
+
+const enhnace = compose(
+    // Create listener for todos path when component mounts
+    firebaseConnect([
+        'todos' // { path: '/todos' } // object notation
+    ]),
+    // Pass data from redux as a prop
+    connect((state) => ({
+        todos: state.firebase.data.todos,
+        // profile: state.firebase.profile // load profile
+    })),
+    // Add handler for toggling todo
+    withHandlers({
+        toggleTodoComplete: ({ firebase }) => (todoId, todo) =>
+            firebase.update(`todos.${todoId}`, { done: !todo.done })
+    }),
+    // Show no Todos when none found
+    branch(
+        () => {
+            console.log("no data")
+        },
+    )
+)
+
+
+
+const Todos = ({ todos, firebase }) => {
+    // Build Todos list if todos exist and are loaded
+    const todosList = !isLoaded(todos)
+        ? <Text>'Loading'</Text>
+        : isEmpty(todos)
+            ? <Text>Todo list is empty</Text>
+            : Object.keys(todos).map(
+                (key, id) => (
+                    <View style={styles_simpe.itemContainer}>
+                        <CartItem {...this.props}/>
+                    </View>
+                )
+            );
+    return (
+        <View>
+            {todosList}
+        </View>
+    )
 }
 
-const mapStateToProps = (state) => {
-    console.log("|||||||");
-    console.log(state);
-    return {
-        personData: state.personData
-    };
-}
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        showProducts: () => dispatch(showProducts())
-    };
-}
+export default enhnace(Todos);
 
-
-export default connect(
-    mapStateToProps, mapDispatchToProps)
-    (TabTools);
+const size = Dimensions.get('window').width/2;
 
 const styles_simpe = StyleSheet.create({
     cart: {
@@ -60,4 +70,14 @@ const styles_simpe = StyleSheet.create({
         paddingTop: 30,
         flex: 1,
     },
+    itemContainer: {
+        width: size,
+        flexDirection: 'row',
+        height: size,
+    },
+    item: {
+        flex: 1,
+        margin: 3,
+        backgroundColor: 'lightblue',
+    }
 });

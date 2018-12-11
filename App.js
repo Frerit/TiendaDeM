@@ -1,9 +1,13 @@
 import React, {Component} from 'react';
 import { Provider } from 'react-redux';
 import AppNavigator from "./src/navigation";
-import store from "./src/redux/store";
+import createStore from "./src/redux/store";
 
-type Props = {};
+
+// Store Initialization
+const initialState = { firebase: {} };
+const store = createStore(initialState);
+
 export default class App extends Component<Props> {
   render() {
     return (

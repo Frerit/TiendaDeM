@@ -8,7 +8,7 @@ import Carousel, {Pagination} from 'react-native-snap-carousel';
 import {ENTRIES1} from "./dummy/data";
 import SliderEntry from "./component/sliderentry";
 import ShoppingCartIcon from "../../navigation/component/shoppin-cart";
-import TabTools from "./component/tab-tools";
+import TodosList from "./component/tab-tools";
 
 
 class Home extends Component {
@@ -99,7 +99,7 @@ class Home extends Component {
                                          activeTextStyle={styles.textColorActive}
                                          heading="Herramientas" >
 
-                                        <TabTools {...this.props} />
+                                        <TodosList {...this.props} />
                                     </Tab>
                                     <Tab tabStyle={styles.tabContainer}
                                          textStyle={styles.colorText}

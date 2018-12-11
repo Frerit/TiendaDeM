@@ -9,8 +9,8 @@ class CartItem extends Component {
         console.log("Cart|||  "+ JSON.stringify(this.props.product));
         return (
             <View style={[styles.root, this.props.style]} >
-                <TouchableOpacity onPress={() => this.props.navigation.navigate("Detail", {item: this.props.item} )}>
-                    <Image style={styles.cardItemImagePlace} source={{uri: this.props.product.image}}
+                <TouchableOpacity onPress={() => console.log("Click")}>
+                    <Image style={styles.cardItemImagePlace} source={{uri: 'https://placekitten.com/200/200'}}
 
                     />
                 </TouchableOpacity>

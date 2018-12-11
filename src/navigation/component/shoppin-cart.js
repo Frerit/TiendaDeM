@@ -7,16 +7,11 @@ import { withNavigation } from 'react-navigation';
 
 const ShoppingCartIcon = props => (
         <Button style={styles.shoppinheader} badge transparent onPress={()=> props.navigation.navigate('Cart')}>
-            <Text style={styles.textBageShopping}> { props.cartItems.length }</Text>
+            <Text style={styles.textBageShopping}>  0 </Text>
             <Icon style={styles.iconShopin} size={ 40 } name="ios-cart"  />
         </Button>
 );
 
-const mapDispatchToProsp = ( state ) => {
-    console.log("State||| "+ state);
-    return {
-        cartItems: state.cart
-    }
-}
 
-export default connect(mapDispatchToProsp, null)(withNavigation(ShoppingCartIcon));
+
+export default withNavigation(ShoppingCartIcon);
