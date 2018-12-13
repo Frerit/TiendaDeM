@@ -3,6 +3,7 @@ import RNFirebase from 'react-native-firebase';
 import { getFirebase, reactReduxFirebase } from 'react-redux-firebase';
 import thunk from 'redux-thunk';
 import reducer from '../reducer';
+import { createReactNavigationReduxMiddleware } from 'react-navigation-redux-helpers';
 
 
 const reactNativeFirebaseConfig = {
@@ -10,8 +11,8 @@ const reactNativeFirebaseConfig = {
 };
 
 const reduxFirebaseConfig = {
-    userProfile: 'users', // save users profiles to 'users' collection
-};
+    userProfile: 'users', // configuracion por si requiere login
+}
 
 export default (initialState = { firebase: {} }) => {
     // initialize firebase
@@ -20,6 +21,10 @@ export default (initialState = { firebase: {} }) => {
     const middleware = [
         // make getFirebase available in third argument of thunks
         thunk.withExtraArgument({ getFirebase }),
+        createReactNavigationReduxMiddleware(
+            "root",
+            state => state.nav,
+        )
     ];
 
     const store = createStore(

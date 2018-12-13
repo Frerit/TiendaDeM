@@ -1,10 +1,14 @@
 import { combineReducers } from 'redux'
 import { firebaseStateReducer } from 'react-redux-firebase'
 import cartItem from "../reducer/cart";
+import AppNavigator from "../../navigation";
+import {createNavigationReducer} from 'react-navigation-redux-helpers';
 
+const navReducer = createNavigationReducer(AppNavigator);
 
 export const makeRootReducer = (asyncReducers) => {
     return combineReducers({
+        nav: navReducer,
         cartItem: cartItem,
         firebase: firebaseStateReducer,
         ...asyncReducers

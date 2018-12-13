@@ -11,6 +11,10 @@ const slideHeight = viewportHeight * 0.25;
 const slideWidth = wp(60);
 const itemHorizontalMargin = wp(2);
 
+const heighScroll = (contentWidth, contentHeight) => {
+  return contentHeight;
+};
+
 export const sliderWidth = viewportWidth;
 export const itemWidth = slideWidth + itemHorizontalMargin * 2;
 
@@ -39,7 +43,11 @@ export default StyleSheet.create({
         ...StyleSheet.absoluteFillObject
     },
     scrollviews: {
-        flex: 1
+       flex: 0,
+       paddingBottom: 20
+    },
+    contentScroll: {
+      paddingBottom: 10
     },
     exampleContainer: {
         paddingVertical: 0
@@ -155,11 +163,11 @@ export default StyleSheet.create({
     headerTabs: {
         backgroundColor: colors.white,
         color: colors.black,
-        marginTop: 8
+        height: viewportHeight + 200,
+        paddingBottom: 20
     },
     tabContainer: {
-      backgroundColor: colors.white
-
+      backgroundColor: colors.white,
     },
     tabActive: {
         backgroundColor: colors.white

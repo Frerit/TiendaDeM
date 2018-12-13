@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {KeyboardAvoidingView, StyleSheet, Image} from "react-native";
 import {View, Text} from "native-base";
-import {connect} from "react-redux";
 
 import LoginForm from "./component/login-form";
 
@@ -24,16 +23,6 @@ class Login extends Component {
     }
 }
 
-function mapStateToProps(state) {
-    return {
-        persona: state.personData
-    }
-}
-function mapDispatchToProps(dispatch) {
-    return {};
-}
-
-
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -52,4 +41,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default Login;

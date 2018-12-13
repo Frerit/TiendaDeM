@@ -1,41 +1,73 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import { firebaseConnect, withFirebase } from 'react-redux-firebase'
+import PropTypes from 'prop-types'
 import {StyleSheet, ImageBackground} from "react-native";
-import { addProductToCart } from "../../redux/actions/addcard";
 
 import {Container, Button, Text, Icon,
     Content, View } from "native-base";
 
 
-class SingleDetail extends Component {
+export default class SingleDetail extends Component {
+
+    constructor(props, context) {
+        super(props, context);
+        this.state = {
+            cantidad: 1
+        }
+    }
+
+    static propTypes = {
+        todo: PropTypes.object
+    };
+
+    decrement() {
+        this.setState({
+            cantidad: (this.state.cantidad > 1) ? this.state.cantidad - 1 : 0
+        })
+    }
+
+    increment() {
+        this.setState({
+            cantidad: (this.state.cantidad >= 1) ? this.state.cantidad + 1 : 0
+        })
+    }
+
+    toggleDone = () => firebase.set(`/tools/${id}`, !tools.value)
+
+
     render() {
-        const { navigation } = this.props;
-        const item = navigation.getParam('item');
+
+        const { navigation, firebase, tools } = this.props;
+        const item = navigation.state.params
+        console.log("Tttt" + JSON.stringify(tools));
+        console.log("Tttt" + JSON.stringify(this.props));
+
+        console.log(this.toggleDone);
 
         return (
             <Container style={styles.root}>
                <Content>
                    <View style={styles.banner}>
-                       <ImageBackground source={{uri: 'https://placekitten.com/200/200'}} style={{width: '100%', height: '100%'}}>
-                          <View style={styles.outBanner}>
-                           <Text>Inside</Text>
-                              <Icon name='home' />
-                          </View>
+                       <ImageBackground source={{uri: item.image}} style={{width: '100%', height: '100%'}}>
+
                        </ImageBackground>
                    </View>
 
                    <View style={{flex: 1, flexDirection: 'row'}}>
                        <View style={styles.columL} >
+                           <Text style={styles.title}> {item.title} </Text>
                            <Text style={styles.text3}>
-                               [06/Dec/2018:19:26:04 +0000] "GET /index.delta?platform=android&
-                               dev=true&minify=false&deltaBundleId=54a9123e04d6fc30 HT n   TP/1.1" 200 - "-"
-                               "okhttp/3.11.0"
-
+                               { item.subtitle }
                            </Text>
                        </View>
                        <View style={styles.columR} >
                            <Text >Cantidad</Text>
-                           <Text style={styles.text}> {JSON.stringify(item)}</Text>
+                           <Text style={styles.text}> {this.state.cantidad } </Text>
+                           <View style={styles.butons}>
+                               <Button light onPress={() => { this.decrement()}}><Icon name="md-remove"/></Button>
+                               <Button light onPress={() => { this.increment()}}><Icon name="md-add"/></Button>
+                           </View>
                            <Button style={{padding: '10%', alignSelf: 'center'}} danger onPress= {() => {
                                this.props.addItemToCart
                                console.log(JSON.stringify(item))
@@ -49,21 +81,6 @@ class SingleDetail extends Component {
         );
     }
 }
-
-function mapStateToProps(state) {
-    return {};
-}
-
-const mapDispatchToProps = ( dispatch ) => {
-    return {
-        addItemToCart: ( product ) => dispatch(addProductToCart(product))
-    }
-}
-
-export default connect(
-    mapStateToProps,mapDispatchToProps
-)(SingleDetail);
-
 
 const styles = StyleSheet.create({
     root: {
@@ -79,13 +96,23 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: 15,
     },
+    title:{
+      fontSize: 18,
+      fontWeight: 'bold',
+      marginBottom: 20
+    },
     columR: {
         flex: .8,
+        paddingTop: 20,
         alignContent: 'center',
         alignItems: 'center',
-        justifyContent: 'center'
+        //justifyContent: 'center'
     },
-
+    butons: {
+      height: 50,
+      marginVertical: 10,
+      flexDirection: 'row'
+    },
     stepper: {
         position: "absolute",
         height: 29,
@@ -103,6 +130,11 @@ const styles = StyleSheet.create({
         shadowOpacity: 1,
         backgroundColor: "rgba(245,50,50,1)",
         opacity: 1
+    },
+    text: {
+        marginTop: 10,
+      fontSize: 18,
+      fontWeight: 'bold'
     },
 
     text2: {

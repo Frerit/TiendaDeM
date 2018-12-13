@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {View, Text, ScrollView, SafeAreaView, StatusBar} from "react-native";
 import {Header, Left, Button, Icon, Title,
     Right, Body, Container, Tabs, Tab, TabHeading} from "native-base";
-import styles, {colors, sliderWidth, itemWidth} from "./../../styles";
+import styles, {colors, sliderWidth, itemWidth, heighScroll} from "./../../styles";
 
 import Carousel, {Pagination} from 'react-native-snap-carousel';
 import {ENTRIES1} from "./dummy/data";
@@ -54,8 +54,6 @@ class Home extends Component {
                     </Header>
                     <ScrollView
                         style={styles.scrollviews}
-                        scrollEventThrottle={200}
-                        directionalLockEnabled={true}
                     >
                         <View style={styles.exampleContainer}>
                         <Carousel slideStyle={styles.slideInnerContainer}

@@ -5,10 +5,7 @@ import Home from "../scenes/home";
 import Login from "../scenes/login";
 
 import SingleDetail from "../scenes/single-detail";
-
-
 import ShoppingCartIcon from "./component/shoppin-cart";
-import {Header, Right} from "native-base";
 import {View} from "react-native";
 
 const Stack = createStackNavigator({
@@ -20,7 +17,9 @@ const Stack = createStackNavigator({
             header: null
         }
     },
-    Detail: SingleDetail
+    SingleDetail: {
+        screen: SingleDetail
+    }
 }, {
     defaultNavigationOptions: {
         headerStyle: {

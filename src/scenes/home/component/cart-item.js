@@ -1,18 +1,19 @@
 import React, { Component } from "react";
 import { View, TouchableOpacity, StyleSheet, Image } from "react-native";
 import { Text, Icon} from "native-base";
+import { NavigationActions } from 'react-navigation';
 
+import NavigateService from '../../../navigation/component/navigationService'
 
 class CartItem extends Component {
-    // Only for displaying symbol in BuilderX.
     render() {
-        console.log("Cart|||  "+ JSON.stringify(this.props.product));
+        const { dispatch, nav } = this.props;
+        console.log( "Cart!!! " + dispatch)
+        const card = this.props.item;
         return (
-            <View style={[styles.root, this.props.style]} >
-                <TouchableOpacity onPress={() => console.log("Click")}>
-                    <Image style={styles.cardItemImagePlace} source={{uri: 'https://placekitten.com/200/200'}}
-
-                    />
+            <View style={styles.root} >
+                <TouchableOpacity onPress={() => NavigateService.navigate('SingleDetail', card) }>
+                    <Image style={styles.cardItemImagePlace} source={{uri: card.image}}/>
                 </TouchableOpacity>
                 <View style={styles.buttonGroup}>
                     <TouchableOpacity style={styles.button1}  >
@@ -23,7 +24,7 @@ class CartItem extends Component {
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.button4}>
                         <View style={styles.center}>
-                            <Text style={styles.text}>$1000</Text>
+                            <Text style={styles.text}> ${card.value} </Text>
                         </View>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.button3}>
